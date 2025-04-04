@@ -1,24 +1,26 @@
-package tree;
-import java.util.ArrayList;
+package tree;  
 
-public class GenericTreeNode<E> {
-	E data;
-	//<some list of children>
-	ArrayList<GenericTreeNode<E>> children;
-	
-	public GenericTreeNode(E theItem) {
-		data = theItem;
-	}
-	
-	public void addChild(GenericTreeNode<E> theItem) {
-		children.add(theItem);
-	}
-	
-	public void removeChild(E theItem) {
-		// this one is a little harder.
-		// what do you do when the item has children?
-		// I suggest "give them to the parent"
-	}
-	
-	
-} 
+import java.util.ArrayList;  
+
+public class GenericTreeNode<E> {  
+    E data;  
+    ArrayList<GenericTreeNode<E>> children;  
+
+    public GenericTreeNode(E theItem) {  
+        data = theItem;  
+        children = new ArrayList<>(); // Initialize the children list  
+    }  
+
+    public void addChild(GenericTreeNode<E> theItem) {  
+        children.add(theItem);  
+    }  
+
+    public void removeChild(E theItem) {  
+        children.removeIf(child -> child.data.equals(theItem));  
+    }  
+    
+    // Optionally, you can add a method to get the data  
+    public E getData() {  
+        return data;  
+    }  
+}  
