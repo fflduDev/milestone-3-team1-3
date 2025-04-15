@@ -49,6 +49,41 @@ public class DiGraphImpl implements DiGraph{
 		return null;
 	}
 
+	@Override
+	public Boolean addEdge(GraphNode fromNode, GraphNode toNode, Integer weight) {
+		// TODO Auto-generated method stub
+		if(!nodeList.contains(fromNode)) {addNode(fromNode);}
+		if(!nodeList.contains(toNode)) {addNode(toNode);}
+		fromNode.addNeighbor(toNode, weight);
+		return fromNode.addNeighbor(toNode, weight);//??
+	}
+
+	@Override
+	public Boolean removeEdge(GraphNode fromNode, GraphNode toNode) {
+		// TODO Auto-generated method stub
+		if(nodeList.contains(fromNode)&&nodeList.contains(toNode)) {
+			fromNode.removeNeighbor(toNode);
+			System.out.println("Removed edge from " + fromNode.getValue() + " to " + toNode.getValue()); // DELETE later
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public Boolean setEdgeValue(GraphNode fromNode, GraphNode toNode, Integer newWeight) {
+		// TODO Auto-generated method stub
+		
+			
+		
+		return null;
+	}
+
+	@Override
+	public Integer getEdgeValue(GraphNode fromNode, GraphNode toNode) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 	
 	
