@@ -25,6 +25,10 @@ public class DiGraphImpl implements DiGraph{
 		if(nodeList.contains(node)) {
 			nodeList.remove(node);
 			System.out.println("removed"+node.getValue());//DELETE later
+			for(GraphNode other:nodeList) {
+				removeEdge(node, other);
+			}
+			
 			return true;
 		}
 		return false;
@@ -32,9 +36,10 @@ public class DiGraphImpl implements DiGraph{
 
 	@Override
 	public Boolean setNodeValue(GraphNode node, String newNodeValue) {
-		// TODO Auto-generated method stub
-		if(nodeList.contains(node)) {
-			node.setValue(newNodeValue);
+		List<String> values=new ArrayList<String>();
+		nodeList.forEach( n->values.add(n.getValue()));
+		if(!values.contains(newNodeValue)) {
+			node.setValue(newNodeValue);//??
 			return true;
 		}
 		return false;
@@ -51,11 +56,11 @@ public class DiGraphImpl implements DiGraph{
 
 	@Override
 	public Boolean addEdge(GraphNode fromNode, GraphNode toNode, Integer weight) {
-		// TODO Auto-generated method stub
-		if(!nodeList.contains(fromNode)) {addNode(fromNode);}
-		if(!nodeList.contains(toNode)) {addNode(toNode);}
-		fromNode.addNeighbor(toNode, weight);
-		return fromNode.addNeighbor(toNode, weight);//??
+		if(nodeList.contains(fromNode)&&nodeList.contains(toNode)) {
+			fromNode.addNeighbor(toNode, weight);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -71,16 +76,45 @@ public class DiGraphImpl implements DiGraph{
 
 	@Override
 	public Boolean setEdgeValue(GraphNode fromNode, GraphNode toNode, Integer newWeight) {
-		// TODO Auto-generated method stub
 		
-			
-		
-		return null;
+		if(fromNode.getNeighbors().contains(toNode)) {
+			fromNode.removeNeighbor(toNode);
+			addEdge(fromNode, toNode, newWeight);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public Integer getEdgeValue(GraphNode fromNode, GraphNode toNode) {
+		
+		
+	}
+
+	@Override
+	public int fewestHops(GraphNode fromNode, GraphNode toNode) {
 		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int shortestPath(GraphNode fromNode, GraphNode toNode) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public List<GraphNode> getNodes() {
+		
+		return nodeList;
+		
+	}
+
+	public GraphNode getNode(String nodeValue) {
+		for(GraphNode node:nodeList) {
+			if(node.getValue().equals(nodeValue)) {
+				return node;
+			}
+		}
 		return null;
 	}
 
