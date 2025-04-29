@@ -10,18 +10,19 @@ public interface DiGraph {
 	public String getNodeValue(GraphNode node);
 	
 	public Boolean addEdge(GraphNode fromNode, GraphNode toNode, Integer weight);
-	//public Boolean addEdgeStr(String fromNode, String toNode, int weight);
+	public Boolean addEdge(String fromNode, String toNode, int weight);
 	public Boolean removeEdge(GraphNode fromNode, GraphNode toNode);
 	public Boolean setEdgeValue(GraphNode fromNode, GraphNode toNode, Integer newWeight);
 	public Integer getEdgeValue(GraphNode fromNode, GraphNode toNode);
 
-	//public List<GraphNode> getAdjacentNodes(GraphNode node);
-	//public Boolean nodesAreAdjacent(GraphNode fromNode, GraphNode toNode);
-	//public Boolean nodeIsReachable(GraphNode fromNode, GraphNode toNode);//graphsHW
-	//public Boolean hasCycles();*///if is reachable to itself
+	public List<GraphNode> getAdjacentNodes(GraphNode node);
+	public Boolean nodesAreAdjacent(GraphNode fromNode, GraphNode toNode);
+	public Boolean nodeIsReachable(GraphNode fromNode, GraphNode toNode);//graphsHW
+	public Boolean hasCycles();///if is reachable to itself
 	
 	public List<GraphNode> getNodes();
 	public GraphNode getNode(String nodeValue);
+	
 	
 	public int fewestHops(GraphNode fromNode, GraphNode toNode);
 	public int shortestPath(GraphNode fromNode, GraphNode toNode);
