@@ -9,22 +9,24 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
-import template.GraphNode;
+
+
+
+
 
 public class DiGraphImpl implements DiGraph {
 
 	private List<GraphNode> nodeList = new ArrayList<>();
-
+	
+	
 	@Override
 	public Boolean addNode(GraphNode node) {
-		if (nodeList.contains(node)) {
-			return false;
-		} else {
+		if (getNode(node.getValue())==null) {
 			nodeList.add(node);// fix later
 			System.out.println("added" + node.getValue());// DELETE later
 			return true;
 		}
-
+		return false;
 	}
 
 	@Override
@@ -65,11 +67,15 @@ public class DiGraphImpl implements DiGraph {
 
 	@Override
 	public Boolean addEdge(GraphNode fromNode, GraphNode toNode, Integer weight) {
-		if (nodeList.contains(fromNode) && nodeList.contains(toNode)) {
-			fromNode.addNeighbor(toNode, weight);
-			return true;
+		GraphNode targetFromNode = getNode(fromNode.getValue());
+		GraphNode targetToNode = getNode(toNode.getValue());
+		
+		if (fromNode == null || toNode == null) {
+			return false;
 		}
-		return false;
+
+		targetFromNode.addNeighbor(targetToNode, weight);
+		return true;
 	}
 
 	@Override
@@ -124,12 +130,11 @@ public class DiGraphImpl implements DiGraph {
 
 			for (GraphNode neighbor : current.getNeighbors()) {
 
-				// manage visiting each node only once
 				if (!visitedNodes.contains(neighbor.getValue())) {
 					queue.add(neighbor);
 					visitedNodes.add(neighbor.getValue());
 					hops.put(neighbor, hops.get(current) + 1);
-					// increment hops
+					
 
 				}
 
@@ -149,7 +154,6 @@ public class DiGraphImpl implements DiGraph {
 	}
 
 	public List<GraphNode> getNodes() {
-
 		return nodeList;
 
 	}
@@ -189,13 +193,39 @@ public class DiGraphImpl implements DiGraph {
 
 	@Override
 	public Boolean nodeIsReachable(GraphNode fromNode, GraphNode toNode) {
-		return null;
+		Queue<GraphNode> queue=new LinkedList<GraphNode>();
+		List<GraphNode> visited=new ArrayList<>();
+		queue.add(fromNode);
+		visited.add(fromNode);
+		while (!queue.isEmpty()) {
+
+			GraphNode element = queue.remove();
+			//System.out.println("\n city: " + element.getValue() + "\t");
+			List<GraphNode> neighbours = element.getNeighbors();
+			//System.out.println("neighbors: ");
+
+			for (int i = 0; i < neighbours.size(); i++) {
+				GraphNode n = neighbours.get(i);
+				if (n != null && !visited.contains(n)) {
+					queue.add(n);
+					visited.add(n);
+					
+					//System.out.print("\t" + n.getValue() + "\t");
+
+				}
+				if (n.getValue().equals(toNode.getValue())) {
+					//System.out.println("\t destination found --> " + n.getValue() + "\t");
+					return true;
+				}
+					
+			}
+		}
+		return false;
 		
 	}
 
 	@Override
 	public Boolean hasCycles() {
-		// TODO Auto-generated method stub
-		return null;
+		
 	}
 }
