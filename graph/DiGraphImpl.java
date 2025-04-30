@@ -226,6 +226,10 @@ public class DiGraphImpl implements DiGraph {
 
 	@Override
 	public Boolean hasCycles() {
-		
+		for(GraphNode node:nodeList) {
+			if(nodeIsReachable(node, node));
+			return true;
+		}
+		return false;
 	}
 }
