@@ -17,8 +17,9 @@ public interface DiGraph {
 
 	public List<GraphNode> getAdjacentNodes(GraphNode node);
 	public Boolean nodesAreAdjacent(GraphNode fromNode, GraphNode toNode);
-	public Boolean nodeIsReachable(GraphNode fromNode, GraphNode toNode);//graphsHW
-	public Boolean hasCycles();///if is reachable to itself
+	public Boolean nodeIsReachable(GraphNode fromNode, GraphNode toNode);
+	public Boolean hasCycles();
+	public Boolean hasCycles(GraphNode node);
 	
 	public List<GraphNode> getNodes();
 	public GraphNode getNode(String nodeValue);
@@ -27,6 +28,6 @@ public interface DiGraph {
 	public int fewestHops(GraphNode fromNode, GraphNode toNode);
 	public int shortestPath(GraphNode fromNode, GraphNode toNode);
 	
+	
 
 }
-//reachable algorithm, add counter for hops to destination
