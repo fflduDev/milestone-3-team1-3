@@ -39,18 +39,19 @@ public class GraphTester {
 		graph.addNode(new GraphNode("H"));
 		
 		//add edges
-		graph.addEdgeStr("A", "B", 5);
-		graph.addEdgeStr("B", "C", 5);
-		graph.addEdgeStr("C", "D", 1);
-		graph.addEdgeStr("E", "F", 1);
-		graph.addEdgeStr("F", "A", 1);
-		graph.addEdgeStr("C", "F", 2);
-		graph.addEdgeStr("D", "B", 15);
-		graph.addEdgeStr("G", "C", 5);
-		graph.addEdgeStr("G", "E", 8);
+		graph.addEdge("A", "B", 5);
+		graph.addEdge("B", "C", 5);
+		graph.addEdge("C", "D", 1);
+		graph.addEdge("E", "F", 1);
+		graph.addEdge("F", "A", 1);
+		graph.addEdge("C", "F", 2);
+		graph.addEdge("D", "B", 15);
+		graph.addEdge("G", "C", 5);
+		graph.addEdge("G", "E", 8);
 		
 		//describe
 		printNodesValues(graph.getNodes());
+		System.out.println("Neighbors:");
 		graph.getNodes().forEach(n -> n.printNeighbors());
 		
 		//test reachability
@@ -65,11 +66,11 @@ public class GraphTester {
 		
 		//test fewest hops
 		System.out.println("Fewest hop from G to B is: " + graph.fewestHops(new GraphNode("G"), new GraphNode("B")));
-		printPath(graph.getFewestHopsPath(new GraphNode("G"), new GraphNode("B")));
+		//printPath(graph.getFewestHopsPath(new GraphNode("G"), new GraphNode("B")));
 		
 		//test shortest path
 		System.out.println("Shortest from G to B is: " + graph.shortestPath(new GraphNode("G"), new GraphNode("B"))); 
-		printPath(graph.getShortestPath(new GraphNode("G"), new GraphNode("B")));
+		//printPath(graph.getShortestPath(new GraphNode("G"), new GraphNode("B")));
 	}
 	
 }
