@@ -10,6 +10,7 @@ public class GraphNode {
 	private String value;
 	private HashMap<GraphNode, Integer> paths = new HashMap<>();
 	
+	
 	public GraphNode(String item) {
 		value = item;
 	}
@@ -55,6 +56,14 @@ public class GraphNode {
 		if (getDistanceToNeighbor(neighbor) != null) return false;
 		paths.put(neighbor, weight);
 		return true;
+	}
+
+	
+	public void printNeighbors() {
+		
+		paths.keySet().forEach((n) -> System.out.print(n.getValue()+" "));
+		System.out.println();
+		
 	}
 	
 }
