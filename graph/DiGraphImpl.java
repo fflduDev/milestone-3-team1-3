@@ -289,7 +289,7 @@ public class DiGraphImpl implements DiGraph {
 			}
 		}
 
-		return -1; // No path found
+		return -1;
 	}
 
 	public List<String> getValuesList() {
